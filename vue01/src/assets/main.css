@@ -7,6 +7,14 @@
   font-weight: normal;
 }
 
+button{
+  margin: 0px 20px;
+  outline: none;
+  border: none;
+  color: lightgrey;
+  background: transparent;
+}
+
 a,
 .green {
   text-decoration: none;

@@ -3,7 +3,7 @@
 </template> -->
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const status = ref("Active");
 const name = ref("Deep");
@@ -18,9 +18,21 @@ const handleClick = () => {
   console.log(status.value);
 };
 const addTask = () => {
-  tasks.value.push(formHandle.value);
-  formHandle.value = "";
+  if (formHandle.value != "") {
+    tasks.value.push(formHandle.value);
+    formHandle.value = "";
+  }
 };
+
+const delTask = (index) => {
+  tasks.value.splice(index, 1);
+};
+
+onMounted(async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await response.json();
+  tasks.value = data.map((item) => item.title);
+});
 </script>
 
 <template>
@@ -34,7 +46,13 @@ const addTask = () => {
     <input type="submit" value="Add Item" />
   </form>
   <br />
-  <ul v-for="task in tasks">
-    <li>{{ task }}</li>
+  <ul>
+    <li v-for="(task, index) in tasks" :key="task">
+      <span>
+        {{ task }}
+      </span>
+
+      <button @click="delTask(index)">x</button>
+    </li>
   </ul>
 </template>
