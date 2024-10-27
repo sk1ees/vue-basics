@@ -10,5 +10,6 @@ import Navbar from "./components/Navbar.vue";
   <Hero title="Hello this is Prop" />
   <HomeCards />
 
-  <JobListings />
+  <JobListings :limit="3" :showButton="true"/>
+
 </template>
