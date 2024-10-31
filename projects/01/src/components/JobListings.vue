@@ -1,10 +1,17 @@
 <script setup>
-
-import { ref, defineProps } from "vue";
+import { ref, defineProps, reactive, onMounted } from "vue";
 import JobListing from "./JobListing.vue";
 import { RouterLink } from "vue-router";
 
-const jobs = ref([]);
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
+import axios from "axios";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
+const state = reactive({
+  jobs: [],
+  isLoading: true,
+});
 
 defineProps({
   limit: Number,
@@ -12,6 +19,18 @@ defineProps({
     type: Boolean,
     default: false,
   },
+});
+
+onMounted(async () => {
+  try {
+    const response = await axios.get("/api/jobs");
+
+    state.jobs = response.data;
+    state.isLoading = false;
+  } catch (error) {
+    toast.error("Error Fetching Jobs!");
+    console.log("error fetching jobs , error");
+  }
 });
 </script>
 
@@ -22,13 +41,13 @@ defineProps({
         Browse Jobs
       </h2>
 
-      <div class="text-center text-gray-500 py-6">
+      <div v-if="state.isLoading" class="text-center text-gray-500 py-6">
         <PulseLoader />
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <JobListing
-          v-for="job in jobs.slice(0, limit || jobs.length)"
+          v-for="job in state.jobs.slice(0, limit || state.jobs.length)"
           :key="job.id"
           :job="job"
         />
