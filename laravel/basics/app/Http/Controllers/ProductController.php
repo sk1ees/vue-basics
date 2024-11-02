@@ -26,6 +26,15 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+
+
+        $request->validate([
+
+            'name' => 'required|max:100',
+            'description' => 'nullable|min:3',
+            'size' => 'required|decimal:0,2|max:100',
+
+        ]);
         Product::create($request->input());
         return redirect()->route('products.index');
     }
