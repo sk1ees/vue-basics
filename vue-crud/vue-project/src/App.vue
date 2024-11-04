@@ -10,6 +10,10 @@ import ForComp from "./components/ForComp.vue";
 import ButtonComp from "./components/ButtonComp.vue";
 import FruitParent from "./components/FruitParent.vue";
 import ParentSlot from "./components/ParentSlot.vue";
+import NavbarLink from "./components/NavbarLink.vue";
+import ApiReq from "./components/Https/ApiReq.vue";
+import ImageApi from "./components/Https/ImageApi.vue";
+import { RouterView } from "vue-router";
 let showButton = false;
 
 let className = "bg-black";
@@ -45,5 +49,10 @@ let color = "red";
   <ButtonComp /> -->
 
   <!-- <FruitParent /> -->
-  <ParentSlot />
+  <!-- <ParentSlot /> -->
+  <!-- <NavbarLink /> -->
+
+  <!-- <ApiReq /> -->
+  <!-- <ImageApi /> -->
+  <RouterView />
 </template>
