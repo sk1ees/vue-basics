@@ -14,13 +14,14 @@ class TaskController extends Controller
 
         $task = Task::all();
         // dd($task);
+
         return view('admin', compact('task'));
     }
     public function delete($id)
     {
         $task = Task::findOrFail($id);
         $task->delete();
-        return redirect()->route('show');
+        return redirect()->route('show')->with('success', 'Task deleted successfully!');
     }
     public function individualTask($id)
     {
@@ -32,7 +33,9 @@ class TaskController extends Controller
 
         Task::create($request->input());
         // dd($task);
-        return redirect()->route('show');
+
+
+        return redirect()->route('show')->with('success', 'Task created successfully!');
     }
     public function updateTask(Request $request, $id)
     {
@@ -42,7 +45,7 @@ class TaskController extends Controller
 
         $task->update($request->input());
 
-        return redirect()->route('show');
+        return redirect()->route('show')->with('success', 'Task edited successfully!');
     }
     public function editTask($id)
     {
