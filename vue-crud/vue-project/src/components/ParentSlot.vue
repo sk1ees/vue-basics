@@ -4,7 +4,7 @@ import ChildSlot from "./ChildSlot.vue";
 
 <template>
   <ChildSlot v-slot:rightSlot>
-    <p>This is some custom content for the top slot!</p>
+    <p >This is some custom content for the top slot!</p>
   </ChildSlot>
   <ChildSlot v-slot:bottomSlot>
     <p>This is some custom content for the top slot!</p>

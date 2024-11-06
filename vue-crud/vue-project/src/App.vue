@@ -45,8 +45,8 @@ let color = "red";
 
   <!-- <Greeting name="Deep" age=35 /> -->
   <!-- <ForComp /> -->
-  <!-- 
-  <ButtonComp /> -->
+  
+  <ButtonComp /> 
 
   <!-- <FruitParent /> -->
   <!-- <ParentSlot /> -->
